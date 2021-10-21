@@ -37,7 +37,7 @@
         <div class="main-gallery js-flickity" data-flickity-options='{ "wrapAround": true }'>
             <div class="gallery-cell text-center">
                 <img src="<?php echo url('/'); ?>/img/mic.png" class="d-inline-block align-middle mr-2">
-                <h2>Mine Intelligente Connectée</h2>
+                <h2>Mine Intelligente Connectée TEST</h2>
             </div>
             <div class="gallery-cell text-center">
                 <img src="<?php echo url('/'); ?>/img/mic.png" class="d-inline-block align-middle mr-2">
