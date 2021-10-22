@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\acces_partenaire\profileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -117,3 +118,7 @@ Auth::routes([
     'register' => false,
     'home' => false
 ]);
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('updatePassword', profileController::class);
+});
