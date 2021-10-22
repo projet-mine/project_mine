@@ -18,7 +18,7 @@ class profileController extends Controller
     }
 
     public function profile(){
-        return view('acces_partenaire.profile');
+        return view('acces_partenaire.test');
     }
 
     public function edit(){
