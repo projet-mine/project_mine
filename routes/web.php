@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\acces_partenaire\profileController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
