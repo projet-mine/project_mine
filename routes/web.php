@@ -120,5 +120,6 @@ Auth::routes([
 ]);
 
 Route::group(['middleware' => ['auth']], function () {
+    //Route::resource('profile', profileController::class);
     Route::resource('updatePassword', profileController::class);
 });

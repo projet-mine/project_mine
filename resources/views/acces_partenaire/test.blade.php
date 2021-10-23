@@ -57,39 +57,23 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="mb-5"><i class="fas fa-user-edit fs-4 pe-3"></i>Mettre à jour les informations personnelles</h5>
-                                <form id="form" action="" enctype="multipart/form-data" method="post">
+                                <form id="form" action="/profile/edit" enctype="multipart/form-data" method="post">
                                     @csrf
-                                    @method('put')
+                                    @method('patch')
 
                                     @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <strong>{{ $message }}</strong>
                                         </div>
                                     @endif
-                                    {{-- <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="pt-1 mb-0">Photo de profil</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="file" name="file" class="form-control-file" id="profile_photo">
-                                        </div>
-                                    </div> --}}
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
                                             <h6 class="mb-0">Adresse e-mail</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <input type="text" value="{{Auth::user()->email}}" class="rounded-0 form-control" name="email">
+                                            <input type="email" value="{{Auth::user()->email}}" class="rounded-0 form-control" name="email">
                                         </div>
                                     </div>
-                                    {{-- <div class="row mb-3">
-                                        <div class="col-sm-3">
-                                            <h6 class="mb-0">Numéro de téléphone</h6>
-                                        </div>
-                                        <div class="col-sm-9 text-secondary">
-                                            <input type="text" class="rounded-0 form-control" name="phoneNumber" value="">
-                                        </div>
-                                    </div> --}}
                                     <div class="row">
                                         <div class="mr-0" style="max-width: max-content; margin-left: auto;">
                                             <button type="submit" class="mt-3 mb-3 rounded-1 btn btn-success bg-base border-0 ">Enregistrer les modifications</button>

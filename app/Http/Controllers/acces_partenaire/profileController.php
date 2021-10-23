@@ -21,15 +21,29 @@ class profileController extends Controller
         return view('acces_partenaire.test');
     }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function edit(){
-        // $data = \request()->validate([
-        //     'email' => ['required', 'string', 'email', 'max:255'],
-        //     'password' => ['required', 'string', 'min:8']
-        // ]);
-        // User::findOrFail(\request()->user()->id)->update($data);
+        $data = \request()->validate([
+            'email' => ['required', 'string', 'email', 'max:255']
+        ]);
+        User::findOrFail(\request()->user()->id)->update($data);
+        historique::create([
+            'user_id' => Auth::user()->id,
+            'action' => 'Changed his Email'
+        ]);
+        return redirect('profile')->with('success', 'Your email adress has been updated successfully');
+
+        // $user = User::where('id', Auth::user()->id)->first();
+        // $user->email = $request->email;
         // historique::create([
         //     'user_id' => Auth::user()->id,
-        //     'action' => 'Edit his profile'
+        //     'action' => 'Changed his Email'
         // ]);
         // return redirect('profile')->with('success', 'Your profile has been updated successfully');
     }
@@ -55,6 +69,12 @@ class profileController extends Controller
                     //echo "done";
                     $user->password = $hashed;
                     $user->save();
+
+                    historique::create([
+                        'user_id' => Auth::user()->id,
+                        'action' => 'Changed his password'
+                    ]);
+
                     return back()
                         ->with('successPassword', "Le mot de passe a été bien modifié");
                 } else {
@@ -63,7 +83,7 @@ class profileController extends Controller
                 }
             } else {
                 return back()
-                    ->with('ShortPassword', "Mot de passe trop court");
+                    ->with('ShortPassword', "Mot de passe trop court!");
             }
         } else {
             return back()
