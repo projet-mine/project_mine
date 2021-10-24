@@ -17,7 +17,8 @@ class profileController extends Controller
         $this->middleware('auth');
     }
 
-    public function profile(){
+    public function
+    profile(){
         return view('acces_partenaire.test');
     }
 
@@ -68,6 +69,8 @@ class profileController extends Controller
                     ]);
                     //echo "done";
                     $user->password = $hashed;
+                    $user['password_modified_at'] = \Carbon\Carbon::now();
+
                     $user->save();
 
                     historique::create([

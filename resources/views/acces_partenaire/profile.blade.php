@@ -97,6 +97,9 @@
                     <strong class="text-danger">{{ $message }}</strong>
                 </div>
                 @endif
+                    @if($errors->any())
+                        <div class="alert alert-danger text-start" role="alert"><strong>{{$errors->first()}}</strong></div>
+                    @endif
 
                 <div class="justify-content-center row">
                     <div class="card card-body bg-light align-self-center">

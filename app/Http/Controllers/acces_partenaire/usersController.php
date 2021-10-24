@@ -5,6 +5,7 @@ namespace App\Http\Controllers\acces_partenaire;
 use App\Http\Controllers\Controller;
 use App\Models\historique;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -52,6 +53,8 @@ class usersController extends Controller
             'user_id' => Auth::user()->id,
             'action' => 'Create a new user with the ID : ' . $user->id
         ]);
+        event(new Registered($user));
+
         return redirect()->route('accesPartnersUsers.show')->with('success', 'The user with the ID ' . $user->id . ' has been added successfully');
     }
 

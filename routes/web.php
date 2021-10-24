@@ -83,41 +83,48 @@ Route::get('/productions','\App\Http\Controllers\productionController@getProduct
 
 Route::get('/productions/{production}','\App\Http\Controllers\productionController@getProduction')->name('production.show');
 
-Route::get('/acces_partenaire/users', '\App\Http\Controllers\acces_partenaire\usersController@users')->name('accesPartnersUsers.show');
-
 Route::post('/acces_partenaire/users/create', '\App\Http\Controllers\acces_partenaire\usersController@store');
 
-Route::get('/acces_partenaire/users/{users}/destroy', '\App\Http\Controllers\acces_partenaire\usersController@destroy');
 
 Route::patch('/acces_partenaire/users/{users}/update', '\App\Http\Controllers\acces_partenaire\usersController@update');
 
-Route::get('/acces_partenaire/actualites', '\App\Http\Controllers\acces_partenaire\actualitesController@actualites')->name('accesPartnersActualites.show');
 
 Route::post('/acces_partenaire/actualites/create', '\App\Http\Controllers\acces_partenaire\actualitesController@store');
 
-Route::get('/acces_partenaire/actualites/{actualite}/destroy', '\App\Http\Controllers\acces_partenaire\actualitesController@destroy');
 
 Route::patch('/acces_partenaire/actualites/{actualite}/update', '\App\Http\Controllers\acces_partenaire\actualitesController@update');
 
-Route::get('/acces_partenaire/productions', '\App\Http\Controllers\acces_partenaire\productionsController@productions')->name('accesPartnersProductions.show');
 
 Route::post('/acces_partenaire/productions/create', '\App\Http\Controllers\acces_partenaire\productionsController@store');
 
-Route::get('/acces_partenaire/productions/{production}/destroy', '\App\Http\Controllers\acces_partenaire\productionsController@destroy');
 
 Route::patch('/acces_partenaire/productions/{production}/update', '\App\Http\Controllers\acces_partenaire\productionsController@update');
 
-Route::get('/acces_partenaire/historiques', '\App\Http\Controllers\acces_partenaire\historiquesController@historiques')->name('accesPartnersHistoriques.show');
 
-Route::get('/profile', '\App\Http\Controllers\acces_partenaire\profileController@profile');
+Route::get('/profile', '\App\Http\Controllers\acces_partenaire\profileController@profile')->name('profile-edit');
 
 Route::patch('/profile/edit', '\App\Http\Controllers\acces_partenaire\profileController@edit');
 
 Route::get('/home', '\App\Http\Controllers\indexController@home');
 
+Route::middleware('IsPasswordModified')->group(function (){
+
+    Route::get('/acces_partenaire/historiques', '\App\Http\Controllers\acces_partenaire\historiquesController@historiques')->name('accesPartnersHistoriques.show');
+    Route::get('/acces_partenaire/users', '\App\Http\Controllers\acces_partenaire\usersController@users')->name('accesPartnersUsers.show');
+    Route::get('/acces_partenaire/users/{users}/destroy', '\App\Http\Controllers\acces_partenaire\usersController@destroy');
+    Route::get('/acces_partenaire/actualites', '\App\Http\Controllers\acces_partenaire\actualitesController@actualites');
+    Route::get('/acces_partenaire/actualites/{actualite}/destroy', '\App\Http\Controllers\acces_partenaire\actualitesController@destroy');
+    Route::get('/acces_partenaire/productions', '\App\Http\Controllers\acces_partenaire\productionsController@productions')->name('accesPartnersProductions.show');
+    Route::get('/acces_partenaire/productions/{production}/destroy', '\App\Http\Controllers\acces_partenaire\productionsController@destroy');
+
+
+});
+
 Auth::routes([
     'register' => false,
-    'home' => false
+    'home' => false,
+    'verify'=> true
+
 ]);
 
 Route::group(['middleware' => ['auth']], function () {
